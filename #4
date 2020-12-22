@@ -1,0 +1,96 @@
+#include <iostream>
+
+class Time {
+public:
+    void izm(int b) {
+        a = b;
+    }
+    void writ() {
+        std::cout << "Счётчик равен: " <<a << "\n";
+    }
+    void plus() {
+        if (a == 10) {
+            std::cout << "Счётчик не может быть больше десяти (Счётчик десятичный)";
+        }
+        else {
+            a += 1;
+        }
+
+    }
+    void min() {
+        if (a == 0) {
+            std::cout << "Счётчик не может опуститься ниже нуля (Счётчик десятичный)";
+        }
+        else {
+            a -= 1;
+        }
+    }
+
+private:
+    int a = 0;
+};
+
+int main()
+{
+    setlocale(LC_ALL, "ru");
+    Time sch;
+    char x;
+    int a;
+    std::cout << "Желаете ввести значение (десятичного счётчика) счётчика самостоятельно? [Y/N] ";
+    std::cin >> x;
+    switch (x) {
+    case 'Y':
+        start:
+            std::cout << "Введите значение (десятичного счётчика) счётчика: ";
+            std::cin >> a;
+            if ((a > 10) or (a < 0)) {
+                std::cout << "Введено некорректное число! Число должно находиться в диапозоне от 0 до 10 включительно.\n";
+                std::cout << "Желаете ввести повторно число? Y-Ввести число повторно N - Использовать стандартное число (0) [Y/N] ";
+                std::cin >> x;
+                switch (x) {
+                case 'Y':
+                    goto start;
+                    break;
+                case 'N':
+                    goto fin;
+                    break;
+                default:
+                    goto jojo;
+                }
+            }
+            else {
+                sch.izm(a);
+            }
+    case 'N':
+        fin:
+        break;
+    default:
+        ga:
+        jojo:
+        std::cout << "Я что шутка какая?\nПока.";
+        goto end;
+    }
+    for (;;) {
+        std::cout << "1.Ввывести значение счётчика.\n2.Прибавить к значению счётчика (1).\n3.Отнять от значения счётчика (1).\n4.Прекратить выполнение программы.\nВаш ответ: ";
+        std::cin >> a;
+        switch (a) {
+        case 1:
+            sch.writ();
+            break;
+        case 2:
+            sch.plus();
+            break;
+        case 3:
+            sch.min();
+            break;
+        case 4:
+            goto kid;
+            break;
+        default:
+            goto ga;
+        }
+    }
+    kid:
+    end:
+    return 0;
+}
